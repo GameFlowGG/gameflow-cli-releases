@@ -8,21 +8,15 @@ INSTALL_DIR="${GAMEFLOW_INSTALL:-$HOME/.gameflow}"
 BIN_DIR="$INSTALL_DIR/bin"
 EXE="$BIN_DIR/gameflow"
 
-# --- Remove binary ---
+# --- Remove install directory (binary + all config/data) ---
 
-if [ ! -f "$EXE" ]; then
-  echo "GameFlow CLI not found at $EXE"
+if [ ! -d "$INSTALL_DIR" ] && [ ! -f "$EXE" ]; then
+  echo "GameFlow CLI not found at $INSTALL_DIR"
   exit 0
 fi
 
-rm -f "$EXE"
-echo "Removed $EXE"
-
-# Remove bin dir if empty
-rmdir "$BIN_DIR" 2>/dev/null && echo "Removed $BIN_DIR" || true
-
-# Remove install dir if empty
-rmdir "$INSTALL_DIR" 2>/dev/null && echo "Removed $INSTALL_DIR" || true
+rm -rf "$INSTALL_DIR"
+echo "Removed $INSTALL_DIR"
 
 # --- Remove PATH entries ---
 

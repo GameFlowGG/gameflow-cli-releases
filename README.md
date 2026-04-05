@@ -49,7 +49,39 @@ curl -fsSL https://raw.githubusercontent.com/GameFlowGG/gameflow-cli-dev-release
 
 ### Windows
 
-Download the binary directly from the [Releases](https://github.com/GameFlowGG/gameflow-cli-dev-release/releases) page (`gameflow-windows-amd64.exe`).
+Run in PowerShell:
+
+```powershell
+irm https://raw.githubusercontent.com/GameFlowGG/gameflow-cli-dev-release/main/install.ps1 | iex
+```
+
+This will download the latest dev binary to `%USERPROFILE%\.gameflow\bin\gameflow.exe` and add it to your user `PATH`. No admin rights required.
+
+To install a specific version:
+
+```powershell
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/GameFlowGG/gameflow-cli-dev-release/main/install.ps1))) 1.2.0
+```
+
+---
+
+## Uninstall
+
+### macOS & Linux
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/GameFlowGG/gameflow-cli-dev-release/main/uninstall.sh | sh
+```
+
+### Windows
+
+```powershell
+irm https://raw.githubusercontent.com/GameFlowGG/gameflow-cli-dev-release/main/uninstall.ps1 | iex
+```
+
+Both scripts remove the install directory (including config and stored credentials) and clean up your `PATH`.
+
+---
 
 ### Manual download
 
