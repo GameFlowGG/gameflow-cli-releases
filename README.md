@@ -45,6 +45,12 @@ gameflow builds create --game-id <id> --file ./server.zip --version 1.0.0
 
 Run `gameflow <command> --help` for flags.
 
+Notable flags:
+
+- `builds create --tag <tag>` assigns tags at upload time (repeatable, e.g. `--tag stable --tag canary`). `--poll-interval` sets how often build status is polled, and `--no-progress` disables the progress bar.
+- `builds tag --tag <tag>` **replaces** the build's existing tags rather than adding to them.
+- Global flags: `--debug` logs the underlying HTTP API calls to stderr, and `--pretty` pretty-prints JSON output.
+
 ### Pagination
 
 List commands make a single request by default. Pass a flag to page through results:
