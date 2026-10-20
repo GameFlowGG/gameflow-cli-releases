@@ -22,7 +22,56 @@ Learn more at [gameflow.gg](https://www.gameflow.gg/) · [docs.gameflow.gg](http
 
 ## About the CLI
 
-The GameFlow CLI lets you manage your GameFlow resources from the terminal — builds, server fleets, matchmaking configuration, and more.
+The GameFlow CLI lets you manage your GameFlow resources from the terminal — builds, server fleets, matchmaking configuration, and more. It is built for CI/CD pipelines, scripts, and AI agents as well as for people at a terminal.
+
+### Quick start
+
+```sh
+gameflow login --api-key <your-key>
+gameflow games list
+gameflow builds create --game-id <id> --file ./server.zip --version 1.0.0
+```
+
+### Commands
+
+| Area | Commands |
+|------|----------|
+| Auth | `login`, `logout`, `whoami` |
+| Games | `games list`, `games get` |
+| Builds | `builds list`, `builds status`, `builds create`, `builds tag` |
+| Servers | `servers list`, `servers launch`, `servers stop`, `servers logs` |
+| Regions | `regions list` |
+| Misc | `version`, `schema`, `--api-info` |
+
+Run `gameflow <command> --help` for flags.
+
+### Pagination
+
+List commands make a single request by default. Pass a flag to page through results:
+
+| Command | Flags | Next page |
+|---------|-------|-----------|
+| `servers list` | `--limit` (max 50), `--cursor`, `--search`, `--sort` (`latest`, `oldest`, `name`, `status`) | `hasMore` and `nextCursor` in the output |
+| `builds list` | `--page-size`, `--page-token` | `nextPageToken` in the output |
+| `games list` | `--page`, `--page-size` | a page shorter than the page size is the last one |
+
+### Scripts and AI agents
+
+- **JSON output** — every command prints JSON to stdout, errors included. Progress and debug output go to stderr.
+- **Stable errors** — failures print `{"error": "...", "code": "...", "status": ...}` and exit with a distinct code per kind: `1` internal, `2` usage / invalid argument, `3` unauthenticated / permission denied, `4` not found, `5` network, `6` build failed, `7` timeout.
+- **Self-describing** — `gameflow schema` prints every command, flag, and error code as JSON.
+- **Non-hanging** — `builds create --timeout 20m` (or `--no-wait`) and `servers logs --no-follow --tail 100` always return.
+- **Safe previews** — `servers stop --dry-run` shows what would be stopped.
+
+### Configuration
+
+| Variable | Purpose |
+|----------|---------|
+| `GAMEFLOW_API_KEY` | Authenticate without a config file. Preferred in CI and agent runs. |
+| `GAMEFLOW_TOKEN` | Short-lived token. Takes precedence over a stored key and is never written to disk. |
+| `GAMEFLOW_API_URL` | Override the API base URL (also settable as `api_url` in the config file). |
+
+`gameflow login --api-key-stdin` reads the key from stdin. Config and credentials are stored in `~/.gameflow/config.yaml`.
 
 ---
 
