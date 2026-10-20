@@ -85,10 +85,10 @@ curl -fsSL https://raw.githubusercontent.com/GameFlowGG/gameflow-cli-releases/ma
 
 This will:
 1. Detect your OS and architecture automatically
-2. Download the latest dev binary to `~/.gameflow/bin/gameflow`
+2. Download the latest prod binary to `~/.gameflow/bin/gameflow`
 3. Add it to your `PATH`
 
-To install a specific version instead of `dev`:
+To install a specific version instead of `prod`:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/GameFlowGG/gameflow-cli-releases/main/install.sh | sh -s 1.2.0
@@ -102,7 +102,7 @@ Run in PowerShell:
 irm https://raw.githubusercontent.com/GameFlowGG/gameflow-cli-releases/main/install.ps1 | iex
 ```
 
-This will download the latest dev binary to `%USERPROFILE%\.gameflow\bin\gameflow.exe` and add it to your user `PATH`. No admin rights required.
+This will download the latest prod binary to `%USERPROFILE%\.gameflow\bin\gameflow.exe` and add it to your user `PATH`. No admin rights required.
 
 To install a specific version:
 

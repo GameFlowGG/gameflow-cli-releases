@@ -35,7 +35,7 @@ esac
 if [ -n "$1" ]; then
   TAG="v$1"
 else
-  TAG="dev"
+  TAG="prod"
 fi
 
 DOWNLOAD_URL="https://github.com/$REPO/releases/download/$TAG/gameflow-${os}-${arch}"

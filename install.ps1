@@ -22,7 +22,7 @@ $Arch = if ([System.Environment]::Is64BitOperatingSystem) {
 
 # --- Resolve version ---
 
-$Tag = if ($args.Count -gt 0) { "v$($args[0])" } else { "dev" }
+$Tag = if ($args.Count -gt 0) { "v$($args[0])" } else { "prod" }
 
 $DownloadUrl = "https://github.com/$Repo/releases/download/$Tag/gameflow-windows-$Arch.exe"
 
